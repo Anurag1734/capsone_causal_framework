@@ -1,0 +1,5 @@
+condition,eligible_admissions,patients,historically_established,same_admission_only,uncertain_timing,strict_prior_admission_definition,broader_sensitivity_definition,status
+Diabetes,0,0,0,0,0,not assessed,not assessed,data unavailable in workspace
+Hypertension,0,0,0,0,0,not assessed,not assessed,data unavailable in workspace
+CKD,0,0,0,0,0,not assessed,not assessed,data unavailable in workspace
+Previous MI,0,0,0,0,0,not assessed,not assessed,data unavailable in workspace

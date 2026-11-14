@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+*.egg
+.installed.cfg
+build/
+dist/
+develop-eggs/
+dist-info/
+wheelhouse/
+
+# Virtual environments
+/cuda_env/*
+!/cuda_env/.gitkeep
+/.venv/
+/venv/*
+!/venv/.gitkeep
+env/
+/ENV/
+/.env
+/.env.*
+!/.env.example
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local/private datasets (including MIMIC source data and derived splits)
+data/
+/dataset/
+/datasets/
+
+# ECG waveform data and compressed archives
+*.dat
+*.hea
+*.h5
+*.hdf5
+*.rar
+
+# Model weights and serialized estimators
+/models/checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.pkl
+*.pickle
+*.joblib
+
+# Generated visualizations - ignore contents but keep folder
+*.png
+*.jpg
+*.jpeg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Documents
+*.pdf
+
+# Temporary files
+*.tmp
+*.bak

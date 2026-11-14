@@ -1,0 +1,12 @@
+metric,value,notes
+unique_patients,0,workspace data unavailable
+unique_admissions,0,workspace data unavailable
+total_ecgs,0,workspace data unavailable
+MI_positive_counts,0,workspace data unavailable
+MI_negative_counts,0,workspace data unavailable
+patient_count_train_split,0,workspace data unavailable
+patient_count_validation_split,0,workspace data unavailable
+patient_count_test_split,0,workspace data unavailable
+admissions_per_patient,0,workspace data unavailable
+patient_overlap_across_splits,not assessed,workspace data unavailable
+admission_level_analysis_dataset,not available,workspace data unavailable

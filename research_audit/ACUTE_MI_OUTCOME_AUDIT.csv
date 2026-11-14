@@ -1,0 +1,9 @@
+metric,value,notes
+MI_positive_admissions,0,not assessed
+MI_negative_admissions,0,not assessed
+ICD9_410_coverage,0,not assessed
+ICD10_I21_I22_coverage,0,not assessed
+Duplicate_or_multiple_MI_codes,0,not assessed
+Transfer_or_continuation_admissions,0,not assessed
+MI_label_depends_on_ECG_interpretation,unknown,not assessed
+ICD_vs_troponin_disagreement,0,not assessed

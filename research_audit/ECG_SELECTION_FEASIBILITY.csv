@@ -1,0 +1,7 @@
+metric,value,notes
+available_selection_predictors,not assessed,required patient-admission-level data absent
+missingness,not assessed,required patient-admission-level data absent
+overlap_positivity,not assessed,required patient-admission-level data absent
+extreme_weight_risk,not assessed,required patient-admission-level data absent
+important_unmeasured_selection_factors,not assessed,required patient-admission-level data absent
+ipw_feasibility,not currently feasible,required data absent

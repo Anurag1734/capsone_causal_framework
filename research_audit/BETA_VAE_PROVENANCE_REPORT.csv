@@ -1,0 +1,9 @@
+check,status,evidence
+training_checkpoint_identity,not assessed,not available
+training_cohort_and_split,not assessed,not available
+acute_MI_ECGs_in_training,not assessed,not available
+embedding_extraction_procedure,not assessed,not available
+deterministic_latent_means_used,not assessed,not available
+patient_and_ECG_mapping_integrity,not assessed,not available
+missingness_and_variance,not assessed,not available
+primary_causal_analysis_eligibility,excluded,insufficient provenance evidence in workspace
