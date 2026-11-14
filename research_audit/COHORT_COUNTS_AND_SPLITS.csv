@@ -1,12 +1,25 @@
-metric,value,notes
-unique_patients,0,workspace data unavailable
-unique_admissions,0,workspace data unavailable
-total_ecgs,0,workspace data unavailable
-MI_positive_counts,0,workspace data unavailable
-MI_negative_counts,0,workspace data unavailable
-patient_count_train_split,0,workspace data unavailable
-patient_count_validation_split,0,workspace data unavailable
-patient_count_test_split,0,workspace data unavailable
-admissions_per_patient,0,workspace data unavailable
-patient_overlap_across_splits,not assessed,workspace data unavailable
-admission_level_analysis_dataset,not available,workspace data unavailable
+split,metric,value
+train,ecg_rows,262813
+train,unique_patients,69479
+train,unique_admissions,133771
+train,unique_study_ids,262813
+train,acute_presentation_ecgs,5300
+train,acute_presentation_missing_index_time,2154
+train,handcrafted_feature_columns,95
+train,latent_columns,64
+validation,ecg_rows,56319
+validation,unique_patients,14888
+validation,unique_admissions,28676
+validation,unique_study_ids,56319
+validation,acute_presentation_ecgs,1145
+validation,acute_presentation_missing_index_time,410
+validation,handcrafted_feature_columns,95
+validation,latent_columns,64
+test,ecg_rows,56798
+test,unique_patients,14889
+test,unique_admissions,28922
+test,unique_study_ids,56798
+test,acute_presentation_ecgs,1159
+test,acute_presentation_missing_index_time,489
+test,handcrafted_feature_columns,95
+test,latent_columns,64

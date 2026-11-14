@@ -1,4 +1,25 @@
-category,count,notes
-Before_MI_onset,0,not assessed
-After_MI_onset,0,not assessed
-Uncertain_timing,0,not assessed
+split,Label_Troponin,timing_class,candidate_timing_class,timing_status,ecg_records
+test,Control_Symptomatic,uncertain,after,thresholds not validated; provisional candidate class is not accepted as event-relative,6376
+test,Control_Symptomatic,uncertain,before,thresholds not validated; provisional candidate class is not accepted as event-relative,4541
+test,Control_Symptomatic,uncertain,uncertain,thresholds not validated; provisional candidate class is not accepted as event-relative,43819
+test,MI_Acute_Presentation,uncertain,after,thresholds not validated; provisional candidate class is not accepted as event-relative,284
+test,MI_Acute_Presentation,uncertain,before,thresholds not validated; provisional candidate class is not accepted as event-relative,745
+test,MI_Acute_Presentation,uncertain,uncertain,thresholds not validated; provisional candidate class is not accepted as event-relative,130
+test,MI_Pre-Incident,uncertain,after,thresholds not validated; provisional candidate class is not accepted as event-relative,127
+test,MI_Pre-Incident,uncertain,before,thresholds not validated; provisional candidate class is not accepted as event-relative,776
+train,Control_Symptomatic,uncertain,after,thresholds not validated; provisional candidate class is not accepted as event-relative,31233
+train,Control_Symptomatic,uncertain,before,thresholds not validated; provisional candidate class is not accepted as event-relative,20305
+train,Control_Symptomatic,uncertain,uncertain,thresholds not validated; provisional candidate class is not accepted as event-relative,201796
+train,MI_Acute_Presentation,uncertain,after,thresholds not validated; provisional candidate class is not accepted as event-relative,1283
+train,MI_Acute_Presentation,uncertain,before,thresholds not validated; provisional candidate class is not accepted as event-relative,3442
+train,MI_Acute_Presentation,uncertain,uncertain,thresholds not validated; provisional candidate class is not accepted as event-relative,575
+train,MI_Pre-Incident,uncertain,after,thresholds not validated; provisional candidate class is not accepted as event-relative,580
+train,MI_Pre-Incident,uncertain,before,thresholds not validated; provisional candidate class is not accepted as event-relative,3599
+validation,Control_Symptomatic,uncertain,after,thresholds not validated; provisional candidate class is not accepted as event-relative,6567
+validation,Control_Symptomatic,uncertain,before,thresholds not validated; provisional candidate class is not accepted as event-relative,4457
+validation,Control_Symptomatic,uncertain,uncertain,thresholds not validated; provisional candidate class is not accepted as event-relative,43278
+validation,MI_Acute_Presentation,uncertain,after,thresholds not validated; provisional candidate class is not accepted as event-relative,290
+validation,MI_Acute_Presentation,uncertain,before,thresholds not validated; provisional candidate class is not accepted as event-relative,742
+validation,MI_Acute_Presentation,uncertain,uncertain,thresholds not validated; provisional candidate class is not accepted as event-relative,113
+validation,MI_Pre-Incident,uncertain,after,thresholds not validated; provisional candidate class is not accepted as event-relative,119
+validation,MI_Pre-Incident,uncertain,before,thresholds not validated; provisional candidate class is not accepted as event-relative,753

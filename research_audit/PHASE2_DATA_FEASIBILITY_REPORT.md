@@ -1,81 +1,32 @@
-# PHASE 2 — DATA FEASIBILITY AND TEMPORAL AUDIT
+# Phase 1-2 Data Feasibility and Temporal Audit
 
-## Executive summary
+## Recommendation
 
-The repository snapshot available in this workspace does not contain the required MIMIC-IV raw tables, the MIMIC-IV-ECG source files, or the modeling parquet artifacts needed to execute a numeric Phase 2 audit. The `data/raw` directory contains only archive stubs (`hosp.rar`, `icu.rar`) and there is no `data/modeling` tree with labels, embeddings, or master files. Because the underlying source tables are absent, the audit can only document the required checks and provide the analysis plan in a reproducible form.
+**Gate C: hold causal MI-to-ECG analysis.** The audit runner reads the actual repository paths and real Parquet/lab rows. Successful execution is not a feasibility pass: threshold applicability conflicts with recorded lab reference ranges, one configured assay has no observations, another has no admission IDs, and acute-labeled ECGs remain without an independently validated event time. No causal effects were estimated.
 
-## A. Clinical diagnosis timing
+**Gate A, diagnosis coding: conditional pass for descriptive cohort work.** ICD-9 410* and ICD-10 I21*/I22* are separated from historical ICD-9 412 and ICD-10 I25.2. The original `diagnoses_mi_codes.parquet` and `mi_admissions.parquet` remain unchanged; use `ACUTE_MI_DIAGNOSIS_BY_ADMISSION.csv` for corrected audit flags.
 
-Required audit: validate whether diabetes, hypertension, CKD, and prior MI were recorded before the current admission using the longitudinal admission and diagnosis tables.
+**Gate B, event timing: fail/unresolved.** The threshold image lacks assay-specific citations. Item 51003's supplied cutoff (0.014 ng/mL) differs from its stored upper reference range (0.01); item 52642's cutoff (0.04) is below its stored range (0.08) and all its rows lack `hadm_id`; item 51002 has no observations. Candidate times are retained but are not accepted event times. Official timing classes are therefore uncertain.
 
-Current workspace status: not executable. The required longitudinal diagnosis tables are absent.
+## Diagnosis audit
 
-Strict prior-admission definition: a diagnosis must be documented with a timestamp or encounter date before the index admission start. A same-admission-only code is not treated as historical exposure.
+The audit covers 431,231 admissions and 4,756,326 code rows. Current acute codes are ICD-9 410* or ICD-10 I21*/I22*; historical codes are ICD-9 412 or ICD-10 I25.2. Prior-MI flags use only earlier admissions for the same patient; same-admission codes are not considered prior. See `ACUTE_MI_OUTCOME_AUDIT.csv` and the admission-level output.
 
-Broader sensitivity definition: allow for a short pre-admission window or charted historical diagnosis from the same patient when the temporal ordering is sufficiently supported by the source records.
+## Lab and event-time audit
 
-## B. Acute MI outcome validation
+Source: `data/raw/labevents.rar`, member `labevents.csv`; 118,171,367 rows were streamed and the archive was preserved. The selected-item subset contains 359,163 rows. The event audit reports 38,077 candidate admissions overall and 10,099 with an acute ICD code. These are unvalidated threshold candidates, not MI diagnoses or biological onset times.
 
-Required audit: validate ICD-9 410* and ICD-10 I21* / I22* while excluding 412 and I25.2; assess duplicate coding, transfer admissions, and disagreement with troponin-derived labels.
+The legacy master contains 7,604 acute-presentation ECG rows, 3,053 with missing `index_mi_time`. Of 3,269 acute-admission legacy timestamps, 3,269 match an observed lab row exactly; this proves a measurement exists at that time, not that it is the first measurement above a valid URL.
 
-Current workspace status: not executable because the raw diagnosis tables are absent.
+Among those acute-labeled ECGs, the **provisional** first-candidate timing classes are 4,929 before, 1,857 after, and 818 uncertain. These are not accepted event-relative classifications; the validated timing class remains uncertain for all 7,604 rows.
 
-## C. ECG timing audit
+`ECG_TEMPORAL_RECORDS.csv` contains all ECG rows, a provisional before/after/uncertain class relative to the candidate time, and an official class that remains uncertain. No missing timestamps were filled. The 95 handcrafted features and 64 latent dimensions remain present in the masters; beta-VAE provenance is still missing, and latents remain excluded from causal use.
 
-Required audit: classify each ECG into before MI onset, after MI onset, or uncertain timing using admission context and event timestamps.
+## Remaining requirements
 
-Current workspace status: not executable in the workspace because the waveform metadata, admission records, and MI event labels are absent.
+1. Provide assay/platform references establishing each item-specific URL and units for the relevant years and sexes; resolve the 51003 and 52642 reference-range discrepancies.
+2. Provide linkable observations for item 51002 or document its removal from the rule.
+3. Decide how to handle 52642 measurements without admission IDs; do not infer an admission without a validated rule.
+4. Re-run after threshold adjudication. Keep candidate values separate from accepted event times.
 
-## D. ECG feature audit
-
-Required audit: group the 95 handcrafted features by physiologic domain and assess missingness, distributions, plausibility, and timing-specific availability.
-
-Current workspace status: not executable because the feature tables are missing from `data/modeling`.
-
-## E. Beta-VAE provenance audit
-
-Required audit: confirm training checkpoint identity, cohort and split, use of acute MI ECGs in training, embedding extraction method, patient mapping, and variance diagnostics before allowing any causal use.
-
-Current workspace status: not executable; no model/training artifacts exist in the workspace.
-
-## F. ECG selection bias feasibility
-
-Required audit: evaluate whether ECG acquisition can be modeled using measured variables and whether inverse-probability weighting is feasible.
-
-Current workspace status: not executable; no admission-level cohort with ECG acquisition metadata is available.
-
-## G. Dataset and split feasibility
-
-Required audit: quantify patients, admissions, ECGs, MI-positive counts, and split characteristics while preserving patient-level separation.
-
-Current workspace status: not executable because the modeling parquet and label files are absent.
-
-## Final feasibility decision
-
-Decision: C — Not currently feasible.
-
-Reason: the repository snapshot does not include the raw MIMIC-IV, MIMIC-IV-ECG, or master-data artifacts required for a defensible causal audit, and the generated project documentation explicitly states that the final data pipeline outputs are not available in the workspace.
-
-### What evidence supports this conclusion?
-- `data/raw` contains only archive stubs and no extracted MIMIC tables.
-- `data/modeling` is absent or incomplete.
-- The repository contains the prior methodology documents but no actual phase outputs or datasets to audit.
-- No validated MI diagnosis or ECG-timing dataset can be reconciled without those data sources.
-
-### What remains uncertain?
-- Exact MI-positive/negative counts in the underlying MIMIC cohort.
-- ECG-level timing relative to MI onset.
-- Whether beta-VAE embeddings are causal-eligible.
-- Amount of selection bias associated with ECG acquisition.
-
-### Which analyses must be excluded?
-- Primary Layer 2 causal analysis using post-onset ECGs.
-- Any causal role for VAE latent dimensions.
-- Any use of post-onset ECGs as if they were interchangeable with validated pre-onset or same-admission controls.
-
-### Which variables and cohorts can be used?
-- None in the current workspace because the required raw and modeling data are absent.
-
-### Recommendation
-
-Do not estimate causal effects in this workspace. First restore or provide access to the required source datasets and modeling outputs, then rerun the audit pipeline in the `research_audit` directory before attempting final effect estimation.
+Until these checks pass, the primary handcrafted ECG analysis is not ready for causal estimation. Beta-VAE eligibility is a separate secondary blocker.

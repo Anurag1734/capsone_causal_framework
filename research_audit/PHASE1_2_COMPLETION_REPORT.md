@@ -1,23 +1,11 @@
-# PHASE 1–2 COMPLETION REPORT
+# Phase 1-2 Audit Completion Report
 
-## Summary
+The runner was updated to use the current `data/raw/longitudinal/` and `data/raw/master_dataset/` paths. It audited the diagnosis Parquet, admission chronology, master splits, threshold transcription, and streamed lab subset. Original diagnosis derivatives, master datasets, source archive, and model artifacts were not modified.
 
-A targeted audit of the Phase 1 and 2 requirements was performed against the available repository state. The source data needed for a numeric clinical diagnosis timing audit, MI outcome validation, ECG temporal audit, and cohort reconstruction are not present in this workspace.
+- Diagnosis flags separate acute ICD-9 410*/ICD-10 I21*/I22* from historical ICD-9 412/ICD-10 I25.2.
+- 359,163 selected-item measurements were retained from the archive stream; no full 13.73 GB extraction was attempted because it exceeded available free disk.
+- 38,077 admissions have a provisional first-above-cutoff candidate; thresholds are not validated and candidates are not accepted as MI onset.
+- All 7,604 acute-labeled ECGs remain uncertain under the validated timing rule; 3,053 lack the legacy index time.
+- No models were retrained, master datasets rebuilt, or causal effects estimated.
 
-## Key findings
-- The raw MIMIC-IV and MIMIC-IV-ECG files are not available in extracted form.
-- The modeled cohort folders (`data/modeling`) are absent.
-- Historical diagnosis-timing checks cannot be computed.
-- ECG timing classification and feature availability cannot be computed.
-- Only the audit framework and documentation can be produced in the current workspace.
-
-## Decision gate
-
-C — Not currently feasible.
-
-## Recommended next implementation phase
-
-1. Restore or mount the complete MIMIC-IV v2.2, MIMIC-IV-ECG v1.0, and MIMIC-IV-ECG-Ext-ICD v1.0.1 data sources.
-2. Recreate the raw `data/modeling` outputs referenced in the project documentation.
-3. Re-run the audit scripts in `research_audit` against the actual source tables.
-4. Only after all temporal and provenance checks pass should the project proceed to causal estimation.
+**Gate A:** conditional pass for descriptive ICD audit. **Gate B:** fail for validated troponin event timing. **Gate C:** hold causal MI-to-ECG analysis.

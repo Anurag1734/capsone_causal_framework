@@ -1,0 +1,4 @@
+itemid,assay_type,anchor_year_start,anchor_year_end,sex,url_value,unit
+51002,cTnI,2100,2250,ALL,0.04,ng/mL
+51003,cTnT,2100,2250,ALL,0.014,ng/mL
+52642,cTnI,2100,2250,ALL,0.04,ng/mL

@@ -1,0 +1,4 @@
+itemid,dictionary_label,measurement_rows,direct_hadm_rows,direct_hadm_rows_matching_chronology_and_subject,direct_hadm_rows_unmatched_or_subject_mismatch,missing_hadm_rows,unique_ed_to_discharge_interval_candidates,multiple_ed_to_discharge_interval_candidates,no_ed_to_discharge_interval_candidate,unique_inpatient_interval_candidates,multiple_inpatient_interval_candidates,no_inpatient_interval_candidate,linkage_policy
+51002,Troponin I,0,0,0,0,0,0,0,0,0,0,0,direct hadm_id plus subject match is confirmed; interval-only matches are candidates and do not overwrite source hadm_id
+51003,Troponin T,359000,194115,194115,0,164885,108577,204,56104,19023,1,145861,direct hadm_id plus subject match is confirmed; interval-only matches are candidates and do not overwrite source hadm_id
+52642,Troponin I,163,0,0,0,163,0,0,163,0,0,163,direct hadm_id plus subject match is confirmed; interval-only matches are candidates and do not overwrite source hadm_id

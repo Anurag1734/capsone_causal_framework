@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import json
 from pathlib import Path
 from typing import Dict, Iterable, List
 
@@ -463,6 +464,14 @@ def generate_audit_outputs() -> None:
     write_completion_report()
 
 
+def generate_audit_outputs() -> dict[str, object]:
+    """Compatibility entry point; generate evidence-based outputs, not placeholders."""
+    try:
+        from .phase1_2_audit_runner import build_reports
+    except ImportError:
+        from phase1_2_audit_runner import build_reports
+    return build_reports()
+
+
 if __name__ == "__main__":
-    generate_audit_outputs()
-    print(f"Research audit package written to: {OUTPUT_DIR}")
+    print(json.dumps(generate_audit_outputs(), indent=2, default=str))

@@ -1,9 +1,6 @@
 check,status,evidence
-training_checkpoint_identity,not assessed,not available
-training_cohort_and_split,not assessed,not available
-acute_MI_ECGs_in_training,not assessed,not available
-embedding_extraction_procedure,not assessed,not available
-deterministic_latent_means_used,not assessed,not available
-patient_and_ECG_mapping_integrity,not assessed,not available
-missingness_and_variance,not assessed,not available
-primary_causal_analysis_eligibility,excluded,insufficient provenance evidence in workspace
+latent_columns_present_in_master,present,64 z_ecg_* columns in all three splits
+beta_vae_checkpoint,missing,0 checkpoint files found
+separate_embedding_extraction_outputs,missing,data/modeling/ecg_embeddings is absent
+training_run_provenance,missing,no run-specific log/metadata found
+causal_use_eligible,no,latent provenance unresolved; keep embeddings secondary/excluded

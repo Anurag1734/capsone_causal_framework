@@ -1,12 +1,6 @@
-artifact,path,exists,status,notes
-raw_hosp,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\raw\hosp.rar,True,present,found
-raw_icu,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\raw\icu.rar,True,present,found
-raw_modeling_labels,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\modeling\labels,False,missing,required for Phase 1-2 audit
-raw_modeling_master,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\modeling\master,False,missing,required for Phase 1-2 audit
-ecg_features_dir,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\modeling\ecg_features,False,missing,required for Phase 1-2 audit
-ecg_embeddings_dir,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\modeling\ecg_embeddings,False,missing,required for Phase 1-2 audit
-clinical_dir,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\modeling\clinical,False,missing,required for Phase 1-2 audit
-demographics_dir,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\modeling\demographics,False,missing,required for Phase 1-2 audit
-mimic_iv_hosp,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\raw\MIMIC-IV-2.2\hosp,False,missing,required for Phase 1-2 audit
-mimic_iv_ecg,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\raw\MIMIC-IV-ECG-1.0,False,missing,required for Phase 1-2 audit
-mimic_iv_ecg_ext,C:\Users\anura\OneDrive\Desktop\new claude suggested roadmap\scm\data\raw\MIMIC-IV-ECG-Ext-ICD-1.0.1,False,missing,required for Phase 1-2 audit
+artifact,path,status,notes
+labevents.rar,data/raw/labevents.rar,present; selected items streamed,"118,171,367 rows scanned; archive preserved"
+threshold image,data/raw/troponin_thresholds.jpeg,present; transcribed,No bibliographic assay citation; validation unresolved
+master splits,"data/raw/master_dataset/{train,validation,test}.parquet",present,read-only; not rebuilt
+diagnoses,data/raw/longitudinal/diagnoses_all.parquet,present,4756326 rows used
+VAE checkpoint,models/checkpoints/,missing,0 checkpoint files

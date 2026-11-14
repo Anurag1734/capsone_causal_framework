@@ -74,5 +74,7 @@ The ICD-derived MI set has a separate case-definition issue. `diagnoses_all` con
 - `hosp.rar` members: `emar.csv`, `omr.csv`, `patients.csv`, `prescriptions.csv`, `admissions.csv`.
 - `icu.rar` members: `d_items.csv`, `inputevents.csv`, `procedureevents.csv`, `chartevents.csv`.
 - Neither archive contains `labevents.csv`, `diagnoses_icd.csv`, or MIMIC-IV-ECG signal/record files. The code-level diagnosis Parquet is an existing derivative equivalent for diagnosis-code analyses; `d_labitems.parquet` is an existing lab dictionary equivalent. No archive was extracted.
+- Newly supplied `data/raw/labevents.rar` contains `labevents.csv` (16-column header; 118,171,367 data rows; 13.73 GB uncompressed). Full extraction was not possible with 11.85 GB free on C:. The archive was preserved and streamed read-only; the three configured item IDs yielded 359,163 records in `research_audit/artifacts/troponin_measurements.csv`.
+- Newly supplied `data/raw/troponin_thresholds.jpeg` is an image of a 3-row table, not a CSV. Its seven columns and values were transcribed to `research_audit/artifacts/troponin_thresholds.csv`; the table has no assay-specific bibliographic citation and remains provisional after comparison with observed units/reference ranges.
 
 See [MISSING_ARTIFACTS.csv](MISSING_ARTIFACTS.csv) for action and blocker status, and [DATASET_READINESS_REPORT.md](DATASET_READINESS_REPORT.md) for the minimum restoration list.
