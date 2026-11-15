@@ -1,0 +1,7 @@
+analysis,propensity_age_spline_df,propensity_validation_brier,outcome_age_spline_df,outcome_validation_log_loss
+diabetes_prior,3.0,0.17181969274658568,3.0,0.16553427292254153
+hypertension_prior,7.0,0.2334841031295327,5.0,0.15608354836349309
+ckd_prior,7.0,0.10251959171849648,3.0,0.1678944481279513
+prior_mi,7.0,0.07897764653589626,7.0,0.2131917698903078
+layer2_propensity,5.0,0.03152722002686428,,
+layer2_outcome,,,3.0,0.9596599236504041

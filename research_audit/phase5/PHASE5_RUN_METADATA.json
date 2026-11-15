@@ -1,0 +1,25 @@
+{
+  "seed": 20261115,
+  "folds": 5,
+  "bootstrap_repetitions": 1000,
+  "bootstrap_seed": 20261115,
+  "training_n": 133699,
+  "validation_n": 28667,
+  "test_n": 28909,
+  "all_patients": 99214,
+  "patients_split_across_source_splits": 0,
+  "layer1_n": 191275,
+  "layer1_patients": 99214,
+  "layer2_n": 167066,
+  "layer2_patients": 93946,
+  "layer2_missing_feature_values": 0,
+  "propensity_clipping": [
+    0.01,
+    0.99
+  ],
+  "tuning_candidates_age_spline_df": [
+    3,
+    5,
+    7
+  ]
+}

@@ -1,0 +1,3 @@
+# Phase 6B - Latent Representation Status
+
+The 64 beta-VAE dimensions remain excluded. The existing `BETA_VAE_PROVENANCE_REPORT.md` documents that model weights, training metadata/cohort split, and latent extraction outputs are unavailable, so checkpoint identity, training inclusion, extraction determinism, mapping integrity, and latent diagnostics cannot be verified. Phase 6 does not retrain the VAE or repeat those provenance checks. No verified latent representation is available; this component is excluded for the previously established reason. The handcrafted feature analysis proceeds without it.

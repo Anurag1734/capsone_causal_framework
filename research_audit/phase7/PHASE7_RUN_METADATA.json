@@ -1,0 +1,20 @@
+{
+  "analysis_date_local": "2026-11-15",
+  "bootstrap_repetitions": 500,
+  "random_seed": 20261115,
+  "crossfit_folds": 5,
+  "age_boundary_years": 65,
+  "primary_layer2_rows": 167066,
+  "primary_layer2_patients": 93946,
+  "primary_acute_mi_cases": 7353,
+  "selection_denominator_admissions": 431231,
+  "selection_eligible_ecg_admissions": 191275,
+  "broad_layer2_rows": 181643,
+  "broad_layer2_cases": 21930,
+  "broad_layer2_clean_controls": 159713,
+  "selection_weight_ess": 173194,
+  "selection_weighted_same_direction_features": 89,
+  "broad_code_same_direction_features": 85,
+  "phase7_gate2": "partially satisfied",
+  "phase8_started": false
+}

@@ -1,0 +1,10 @@
+stage_or_group,admissions_or_patients,definition
+Adult admission denominator,431231,All adult admissions in the corrected chronology and diagnosis audit
+No eligible in-episode ECG,239956,Not eligible for ECG feature outcome analysis
+ECG-selected admissions,191275,One earliest eligible ECG selected per admission
+ECG-selected patients,99214,Patients represented in the selected-admission cohort
+Acute MI diagnosis with selected ECG,7353,Acute ICD code on admission; may also have prior MI
+Nonacute historical/prior MI group,24209,Kept separate; excluded from primary clean comparison
+Clean comparison admissions,159713,No documented current or prior MI
+Primary Layer 2 admissions,167066,"7,353 acute cases plus 159,713 clean comparisons"
+Primary Layer 2 patients,93946,Patient clusters represented in primary comparison

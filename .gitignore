@@ -41,6 +41,11 @@ data/
 /dataset/
 /datasets/
 
+# Large derived admission-level audit extracts (regenerable; keep out of Git)
+/research_audit/ACUTE_MI_DIAGNOSIS_BY_ADMISSION.csv
+/research_audit/ECG_TEMPORAL_RECORDS.csv
+/research_audit/MI_EVENT_TIME_AUDIT.csv
+
 # ECG waveform data and compressed archives
 *.dat
 *.hea

@@ -1,0 +1,97 @@
+# A Two-Layer Observational Analysis of Recorded Cardiovascular Risk Factors and ECG Features in Acute Myocardial Infarction Admissions
+
+**Manuscript status:** Phase 8 working draft. Numerical results are transcribed from finalized Phase 3–7 artifacts. Confirm journal-specific formatting, exact software versions, and full reference metadata before submission. This draft does not claim identified causal effects.
+
+## 1. Introduction
+
+Acute myocardial infarction (MI) is diagnosed through clinical assessment that integrates symptoms, cardiac biomarkers, imaging, and electrocardiography (ECG). ST-segment and T-wave findings are clinically important, but their interpretation depends on lead, timing, context, and diagnostic criteria; ECG morphology alone does not define every MI presentation [1,2]. Computational work has evaluated ECGs for MI or acute coronary syndrome classification and prediction [3–5]. Such prediction tasks differ from estimating adjusted associations between a coded diagnosis and continuous ECG morphology.
+
+MIMIC-IV is a deidentified electronic health record resource for hospitalized patients, and MIMIC-IV-ECG provides linked 12-lead ECG waveforms and metadata [6,7]. These resources permit large admission-level analyses, while also requiring careful treatment of repeated admissions, ECG availability, diagnosis coding, and uncertain temporal relationships. Directed acyclic graphs (DAGs) can make adjustment assumptions explicit, but a graph does not itself establish causal identification [8,9].
+
+We followed a two-layer research structure. Layer 1 estimates adjusted associations between recorded histories of diabetes, hypertension, CKD, and prior MI and an acute MI diagnosis at the admission level. Layer 2 estimates adjusted differences in 95 handcrafted ECG features between acute-MI-coded admissions and clean comparison admissions with an eligible in-episode ECG. We then assessed robustness to measured-covariate ECG selection weighting, alternative MI coding, unmeasured-confounding sensitivity, and age and sex subgroup contrasts. The target is an observational characterization of coded admissions, not the causal effect of MI on ECG morphology: onset of MI relative to the selected ECG is not known.
+
+## 2. Data and cohort
+
+### Data sources and analytic unit
+
+The analysis used MIMIC-IV clinical records linked to MIMIC-IV-ECG [6,7]. The analytic unit was an adult hospital admission (age at least 18 years); patient identifiers were retained for grouped cross-validation and patient-cluster uncertainty estimation. One ECG was selected per eligible admission: the earliest eligible ECG within the admission interval, using emergency-department registration through discharge and an admission-to-discharge fallback when needed; study identifier resolved ties. The feature set consisted of 95 handcrafted ECG measurements available in the finalized analysis dataset. The feature values were ECGdeli-derived or machine processed as specified in the project dictionary; units are reported as supplied and were not independently clinically validated. `QRS_Dur_Global_count` is a technical/support measure and is not interpreted as physiology.
+
+### Cohort construction
+
+The corrected adult denominator contained 431,231 admissions. Of these, 191,275 (44.36%) had an eligible in-episode ECG and represented 99,214 patients. The selected-admission cohort comprised 7,353 admissions with an acute MI code, 24,209 admissions with nonacute historical/prior MI coding only, and 159,713 admissions without documented current or prior MI. The history-only group was not included as a control in the primary Layer 2 comparison. The primary Layer 2 cohort therefore comprised 167,066 admissions from 93,946 patients (7,353 acute-code cases and 159,713 clean controls). The acute definition used ICD-9-CM 410* or ICD-10-CM I21*/I22*; historical codes were ICD-9-CM 412 or ICD-10-CM I25.2. The broad sensitivity definition added historical MI coding on the same admission; prior-only admissions remained outside the comparison.
+
+**Figure 1** summarizes admission flow. Exact counts and definitions are in Table 1. Of 375,930 inspected ECGs, 375,642 were within valid bounds and 288 outside the bounds were excluded; multiple ECGs were reduced to one per admission. The resulting estimates describe ECG-selected inpatient admissions, not all adult admissions or all patients with MI.
+
+## 3. Causal framework and estimands
+
+The roadmap DAG separates two questions. In Layer 1, recorded chronic conditions and demographic factors are related to acute MI coding. Age and recorded sex are treated as confounders; the adjustment set expands by exposure for CKD and prior MI. Prior MI is retained as a descriptive contrast rather than interpreted as an intervention. In Layer 2, acute MI coding is the exposure and ECG feature the outcome, adjusted for age (flexible spline), recorded sex, diabetes, hypertension, CKD, and prior MI. Figure 2 reproduces the hypothesized graph and its ECG-selection mechanism.
+
+The MI-code-to-ECG arrow in the graph is a working hypothesis. The admission diagnosis and ECG are from the same admission, and MI onset relative to the selected ECG is unavailable. The data therefore do not establish that the event preceded the ECG. ECG selection may depend on MI, severity, symptoms, and care pathways, some of which may also relate to the ECG feature. Conditioning on having an ECG can induce selection bias. Neither adjustment nor sensitivity analysis recovers the missing event time.
+
+The Layer 1 estimand is the adjusted admission-level risk difference for acute MI coding associated with each recorded history in the ECG-selected adult-admission cohort. The Layer 2 estimand is the adjusted mean feature difference associated with acute MI coding in the primary case/clean-control cohort. Both are reported as observational contrasts under the specified model and measured covariates. They are not estimates of an intervention effect unless additional identification assumptions, including temporal ordering and sufficient control of confounding and selection, hold; those assumptions are not established here.
+
+## 4. Statistical methods
+
+For Layer 1, AIPW combined exposure propensity and exposure-specific outcome models. Diabetes and hypertension adjustment included age and sex; CKD additionally included diabetes and hypertension; prior MI additionally included CKD and was descriptive. For Layer 2, a logistic propensity model and separate linear outcome models by exposure arm were fit for each feature. Age was modeled using a flexible B-spline; validation selected three degrees of freedom from candidates 3, 5, and 7. Five-fold GroupKFold cross-fitting kept admissions from a patient together (seed 20261115). Propensities were clipped to [0.01, 0.99].
+
+Uncertainty was summarized using patient-cluster bootstrap intervals (1,000 resamples, seed 20261115; nuisance predictions held fixed) and clustered Wald inference as documented in Phase 5. Benjamini–Hochberg (BH) correction was applied over the 95 feature tests. Feature-group omnibus tests used cluster-covariance Wald tests with Holm correction across seven physiological groups; technical/support measures were handled separately. Standardized feature contrasts divide the raw mean difference by the feature SD in the primary cohort. Since the ECG features are correlated, individual feature tests are not independent replications.
+
+Phase 7 sensitivity analyses used saved Phase 5 estimates and finalized cohort identifiers. Selection weighting modeled ECG availability using measured admission covariates. The broad MI definition included acute or historical MI code on the same admission. Unmeasured confounding was assessed with approximate E-values for Layer 1 binary contrasts and an illustrative additive prevalence-imbalance-by-confounder-association tipping grid for Layer 2. Age and sex heterogeneity was evaluated with direct interaction contrasts and BH adjustment; within-stratum significance counts alone were not treated as interaction evidence. These analyses assess specified assumptions and do not identify event timing.
+
+## 5. Results
+
+### Cohort and Layer 1
+
+The cohort counts are shown in Table 1. In 191,275 ECG-selected adult admissions, acute MI coding prevalence was 3.84%. Layer 1 AIPW estimates were: diabetes prevalence 22.57%, risk difference +0.00685 (95% CI 0.00420 to 0.00950; p=4.0×10⁻⁷); hypertension prevalence 43.80%, risk difference −0.00505 (−0.00700 to −0.00296; p=3.76×10⁻⁷); and CKD prevalence 17.47%, risk difference −0.00168 (−0.00592 to 0.00312; p=0.458). Prior MI prevalence was 10.70%; its adjusted contrast was +0.05480 (0.04670 to 0.06408) and is reported descriptively. See Table 2 and Figure 3. Propensity clipping affected 9.96% of CKD and 12.37% of prior-MI propensity estimates; exposure-weighted effective sample sizes were limited (4,554 CKD; 4,690 prior MI). These diagnostics warrant cautious interpretation.
+
+### Layer 2 feature estimates
+
+The primary Layer 2 analysis included 167,066 admissions (93,946 patients), 7,353 acute-code cases, and 159,713 clean controls. Of 95 feature tests, 67 passed BH FDR 5%; 66 were physiological features and one was a technical/support measure. All seven physiological feature groups had a Holm-adjusted significant omnibus test. Mean absolute standardized effects were largest for ST (0.162 SD), T (0.129 SD), and RR (0.128 SD), followed by QRS (0.091 SD), other morphology (0.062 SD), R (0.053 SD), and Q (0.053 SD). Lead-specific directions varied. The largest adjusted standardized differences included ST_Elev_I −0.346 SD, T_Amp_I −0.336 SD, T_Amp_aVR +0.327 SD, ST_Elev_aVF −0.302 SD, and ST_Elev_aVR +0.270 SD. Table 3 gives all 95 estimates and intervals; Table 4 gives group omnibus results; Figures 4, 6, and 7 show distributions and group patterns.
+
+Crude and adjusted standardized feature differences were correlated (r=0.916); directions agreed for 82/95, and absolute effect size decreased after adjustment for 75/95 (Figure 5). These patterns reflect measured feature associations and adjustment, not causal deconfounding in the presence of unmeasured factors.
+
+### Phase 6 interpretation
+
+The Phase 6 interpretation emphasizes structured, lead-dependent ST/T differences rather than a single universal morphology. The exploratory model-implied profiles set the acute diagnosis indicator to 0 or 1 at fixed covariate profiles. They are conditional outcome-model predictions, not observed counterfactual ECGs, and have no profile-specific uncertainty intervals. Limited profile overlap (propensities approximately 0.020–0.037) further constrains them. They are not evidence of what ECG would result if MI were induced or prevented. Beta-VAE features were excluded because their provenance was not verified.
+
+## 6. Sensitivity analyses
+
+### Unmeasured confounding
+
+Approximate Layer 1 E-values were 1.66 for diabetes (nearest-null confidence-limit E-value 1.48) and 1.57 for hypertension (1.39). The CKD point E-value was 1.28 and its confidence interval crossed the null (nearest-null E-value 1.00). Prior MI was descriptive and has no causal E-value. The RD-to-RR conversion is approximate and uses observed unexposed risk; modest residual associations could materially weaken the diabetes and hypertension contrasts. For Layer 2, the omitted-binary-confounder tipping grid illustrates combinations of prevalence imbalance and feature association that could move estimates or intervals to zero; it is not a fitted confounder model and does not exclude plausible bias.
+
+### ECG selection
+
+Only 44.36% of denominator admissions had an eligible ECG. The measured-covariate selection propensity ranged 0.195–0.864; stabilized weights had a 99th percentile of 2.06 and maximum 2.27, with effective sample size 173,194. All eight measured selection covariates had post-weight absolute standardized differences below 0.10. Across features, 89/95 weighted estimates agreed in direction with primary estimates; median absolute shift was 0.009 SD (90th percentile 0.022; maximum 0.056). Weighted BH identified 69/95, including 66 of the 67 primary discoveries. Mean absolute ST/T contrasts were 0.146/0.128 SD weighted versus 0.162/0.129 SD primary. This supports stability to the measured-covariate weighting specification, conditional on its assumptions. It cannot address selection on unmeasured severity, symptoms, or care pathways.
+
+### Alternative MI coding
+
+The broad same-admission definition yielded 21,930 cases and 159,713 clean controls (181,643 admissions). Broad and primary estimates correlated 0.956; 85/95 directions agreed, and median absolute difference was 0.024 SD. BH findings were 76/95 under broad coding versus 67/95 primary, with 59 shared discoveries. Mean absolute ST/T contrasts attenuated from 0.162/0.129 SD to 0.126/0.108 SD. QRS increased (0.091 to 0.123 SD) while RR decreased (0.128 to 0.029 SD). Thus broad coding retains an overall ST/T pattern but changes magnitude and other group behavior; it also changes the case composition and does not establish acute onset. See Table S2 and Figure 8.
+
+### Age and sex heterogeneity
+
+Among admissions under 65 years (90,395 admissions; 2,551 cases), 66/95 features passed within-group BH; for age 65 or older (76,671 admissions; 4,802 cases), 57/95 passed. Female admissions had 58/95 (84,650 admissions; 2,877 cases), and male admissions had 56/95 (82,416 admissions; 4,476 cases). Direction agreement with primary estimates ranged from 85/95 to 89/95. Direct BH-adjusted interaction tests supported 11 age and 13 sex contrasts. Leading contrasts included ST_Elev_V5, R_Amp_aVR, and ST_Elev_V6 for age; and RR_Mean_Global_iqr, R_Amp_aVF, R_Amp_V2, ST_Elev_V2, and R_Amp_V5 for sex. This is feature-specific statistical heterogeneity, not uniform effect modification. The age threshold is an implementation choice. Full subgroup and interaction estimates appear in Tables S3–S4 and Figure 9.
+
+## 7. Discussion
+
+In this ECG-selected inpatient cohort, acute-MI-coded admissions showed adjusted differences across a range of handcrafted ECG measurements, with the largest average contrasts in ST and T features and lead-dependent polarity. The measured-covariate selection-weighted analysis was close to the primary estimates overall. A broader same-admission code definition retained the broad ST/T pattern but attenuated its magnitude and changed the RR and QRS group summaries. Direct interaction tests suggested some age- and sex-specific feature heterogeneity. These findings support a structured observational description of diagnosis-feature associations.
+
+The results should be interpreted alongside ECG classification research, which typically asks whether waveform or feature inputs predict a diagnostic label [3–5]. An adjusted association analysis has a different target and does not demonstrate diagnostic accuracy, incremental utility, or clinical benefit. Existing work also characterizes ECG patterns and outcomes in MI populations [10,11]. A recent MIMIC-IV study relating structured ECG features to type 1 versus type 2 MI is a close neighbor, although it uses a different ICU/elevated-troponin population and subtype target [12]. Accordingly, this study should not be described as the first or as definitively novel. A focused comparison is provided in the accompanying literature review; novelty remains modest and provisional.
+
+The two-layer structure helps separate chronic risk-factor associations with acute coding from ECG-feature contrasts by acute coding. It also makes clear that the second layer is a conditional association in patients selected for ECG, not a causal effect of infarction on morphology. The Layer 1 diabetes and hypertension effects are small in absolute terms and have modest approximate E-values. The prior-MI contrast is descriptive, and CKD is compatible with the null. Multiple testing, correlated features, limited overlap, and subgroup multiplicity constrain feature-level interpretation.
+
+## 8. Limitations
+
+First, timing is the central limitation: MI onset relative to the selected ECG is unknown. Diagnosis codes and same-admission ECG availability cannot establish whether the event preceded the waveform. Second, only 44.36% of adult admissions had an eligible ECG. Selection weighting balanced recorded variables but relies on measured-covariate assumptions and cannot eliminate unmeasured selection. Third, diagnosis coding and histories may be incomplete or inaccurate. Smoking, lipids, BMI, and acute severity were not adequately captured in the adjustment set; this leaves residual confounding plausible. Fourth, some exposure propensity distributions showed clipping and limited overlap. Fifth, the 95 ECG features are correlated, so significant rows are not independent replications; statistical significance does not establish clinical importance or diagnostic utility. Sixth, broader coding changes case mix; the age threshold and subgroup contrasts are exploratory. Seventh, Phase 6 profile predictions have no profile-specific intervals and are not counterfactual effects. Finally, the data are from one tertiary-care setting and may not generalize to other populations or care settings.
+
+## 9. Conclusion
+
+Among adult inpatient admissions selected for an eligible ECG, acute-MI coding was associated with adjusted, lead-dependent differences across 95 handcrafted ECG features, particularly ST and T measurements. These associations were reasonably stable to measured-covariate selection weighting and remained visible, though attenuated, under a broader same-admission MI-code definition. The study does not establish that MI caused these ECG differences because event timing relative to ECG is unknown and residual confounding and selection remain possible. It does not define a universal MI ECG signature or establish literature-based novelty.
+
+## Tables and figures
+
+See `PHASE8_TABLES/` and `PHASE8_FIGURES/FIGURE_CAPTIONS.md`. Figures include the cohort flow, DAG, Layer 1 and Layer 2 estimates, crude-adjusted comparison, feature group summaries, sensitivity comparisons, subgroup interaction results, and exploratory model-implied profiles. All model-implied profile results must retain their exploratory caveat.
+
+## References
+
+Numbered references are listed in `PHASE8_LITERATURE_REVIEW.md` and fully specified in `PHASE8_REFERENCES.bib`.

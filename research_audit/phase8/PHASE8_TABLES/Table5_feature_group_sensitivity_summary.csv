@@ -1,0 +1,22 @@
+analysis,feature_group,mean_absolute_standardized_effect,features_n,features_BH_05,direction_match_primary_n
+Primary acute-code,ST,0.16164904919699466,12,10,12
+Primary acute-code,T,0.1289602044456176,24,22,24
+Primary acute-code,QRS,0.0907717835314176,2,1,2
+Primary acute-code,RR,0.12803182355661205,2,2,2
+Primary acute-code,R,0.05335664758331802,24,13,24
+Primary acute-code,Q,0.053244900790494154,24,13,24
+Primary acute-code,Other morphology,0.06237427458474154,6,5,6
+Selection-weighted,ST,0.14571375899273936,12,11,12
+Selection-weighted,T,0.12790060527796632,24,22,23
+Selection-weighted,QRS,0.0873495432513882,2,1,2
+Selection-weighted,RR,0.1539692838402131,2,2,2
+Selection-weighted,R,0.05958606053001277,24,14,22
+Selection-weighted,Q,0.05730046383427117,24,14,22
+Selection-weighted,Other morphology,0.05989346054027247,6,4,5
+Broad current-code,ST,0.12628058979505122,12,9,10
+Broad current-code,T,0.10838119606949692,24,22,24
+Broad current-code,QRS,0.1231824783123441,2,1,1
+Broad current-code,RR,0.02946850794931875,2,1,1
+Broad current-code,R,0.05526669159944963,24,17,20
+Broad current-code,Q,0.05344222013348704,24,21,23
+Broad current-code,Other morphology,0.06464437316357315,6,5,6

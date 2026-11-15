@@ -1,0 +1,9 @@
+# Phase 6A - Deconfounded ECG Feature Analysis
+
+This component reuses the finalized Phase 5 adjusted observational contrasts and does not re-estimate effects. The primary cohort is 167,066 admissions from 93,946 patients, with 7,353 acute-MI diagnoses and 159,713 clean controls. All 95 handcrafted features are complete. Features are grouped as ST, Q, R, T, QRS, RR, other morphology, and a separate technical/support count. Beta-VAE dimensions remain excluded.
+
+At BH FDR 5%, 67/95 feature tests are significant, including 66/94 physiological outcomes and the technical count metric. Crude and adjusted standardized estimates have correlation 0.916; directions agree for 82/95 features, while adjustment reduces absolute standardized magnitude for 75/95. This is substantial attenuation for many features, although selected contrasts remain prominent.
+
+The largest physiological adjusted differences are led by ST_Elev_I (-0.346 SD), T_Amp_I (-0.336 SD), T_Amp_aVR (+0.327 SD), ST_Elev_aVF (-0.302 SD), ST_Elev_aVR (+0.270 SD), T_Amp_V5 (-0.269 SD), and T_Amp_V6 (-0.264 SD). Phase 5 bootstrap intervals and q-values are retained in `PHASE6_FEATURE_NOVELTY_RESULTS.csv`. The most visible structure is in ST and T morphology across leads, with lead-dependent sign patterns; it should not be compressed into one universal MI signature.
+
+All results are adjusted observational differences among admissions with an eligible ECG. Unknown MI onset relative to the ECG prevents temporal verification of the proposed MI-to-ECG direction. ECG selection, limited propensity overlap, feature dependence, unmeasured confounding, and diagnosis undercoding remain. FDR significance is not clinical importance, and correlated feature rows are not independent replications. No novelty claim relative to prior literature is made by these analyses alone.

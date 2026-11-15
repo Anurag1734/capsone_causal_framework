@@ -1,0 +1,11 @@
+# Phase 7A - Unmeasured-Confounding Sensitivity
+
+## E-values for Layer 1
+
+E-values are calculated only for the first three Layer 1 binary-exposure/binary-outcome contrasts. Adjusted risk differences are converted approximately to risk ratios using the observed acute-MI risk among unexposed admissions as the baseline risk; the Phase 5 cross-fitted standardized risk under exposure=0 was not saved. This conversion is therefore an explicit approximation, not an exact adjusted RR. Prior MI remains descriptive and receives no causal E-value interpretation. The CSV gives point E-values and the E-value for the confidence limit nearest the null. An E-value describes the minimum joint strength of association on the RR scale that an unmeasured confounder would need with exposure and outcome, conditional on measured factors, to explain away the association; it does not prove that such confounding is absent.
+
+## Continuous Layer 2 outcomes
+
+E-values are not defined for these continuous feature mean differences without an arbitrary dichotomization or another model. Instead, the CSV reports an additive omitted-binary-confounder tipping calculation for all 95 features. If U differs in prevalence between acute-MI and control admissions by Delta_U, and is associated with a feature by gamma SD units, the illustrative bias product is Delta_U x gamma. The table reports the gamma required to move each Phase 5 standardized estimate to zero at 10, 20, and 50 percentage-point U-prevalence differences; it also reports the bias needed to move the nearest confidence limit to zero. This is a transparent sensitivity scale, not an estimated confounder model.
+
+The strongest ST/T contrasts require larger bias products to reach zero than small effects, but even these can be explained by a sufficiently strong, highly imbalanced unmeasured factor. Unmeasured smoking, BMI/lipids, acute severity, and selection processes remain plausible. Unknown ECG/MI ordering is not addressed by E-values or the tipping calculation.
