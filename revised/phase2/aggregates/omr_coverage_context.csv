@@ -1,0 +1,3 @@
+result_name,total_records,unique_patients,legacy_cohort_patients,legacy_cohort_records,legacy_cohort_coverage_pct,source,definition_and_limit
+Blood Pressure,2169549,135594,59863,1316642,60.3,longitudinal.rar::longitudinal/phase2_stats.json,Archive aggregate catalogue for its earlier cohort definition; not the reconciled common-index population and not limited to valid SBP/DBP or 730-day pre-index readings
+BMI (kg/m2),1662112,137636,64167,1041860,64.6,longitudinal.rar::longitudinal/phase2_stats.json,"Archive aggregate catalogue for its earlier cohort definition; not proof of pre-window timing, valid units or availability in revised risk set"

@@ -1,0 +1,5 @@
+minimum_valid_readings,eligible_n,incident_mi_n,no_recorded_incident_mi_before_censor_n,base_eligible_n,base_incident_mi_n,eligible_retention_pct,case_retention_pct,mean_sbp_mmHg,median_readings_per_patient,mean_readings_per_patient,within_person_sbp_sd_mmHg,eligible_without_threshold_bp_n,cases_without_threshold_bp_n,status,source_provenance
+1,53956,1223,52733,168915,3207,31.9,38.1,,,,,114959,1984,aggregate value available,authoritative reconciliation; qualifying BP in fixed 730-day pre-index window; not final analytic denominator
+2,,,,168915,3207,,,,,,,,,not available,requires aggregate patient reading counts in approved common-index risk set; not supplied by reconciliation and not computed in this no-cohort task
+3,,,,168915,3207,,,,,,,,,not available,requires aggregate patient reading counts in approved common-index risk set; not supplied by reconciliation and not computed in this no-cohort task
+4,,,,168915,3207,,,,,,,,,not available,requires aggregate patient reading counts in approved common-index risk set; not supplied by reconciliation and not computed in this no-cohort task

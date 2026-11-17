@@ -1,0 +1,5 @@
+horizon_days,first_acute_mi_events_by_horizon,patients_with_ascertainable_followup,observed_deaths_before_mi,censoring_n,censoring_pct,ambiguous_event_dates,competing_event_pct,administrative_boundary_verified,status,reason,source_provenance
+90,,,,,,,,No,not estimable,requires approved index risk set and individual observation data; horizon-specific aggregates not supplied,authoritative reconciliation provides overall events but not horizon allocation
+180,,,,,,,,No,not estimable,requires approved index risk set and individual observation data; horizon-specific aggregates not supplied,authoritative reconciliation provides overall events but not horizon allocation
+365,,,,,,,,No,not estimable,requires approved index risk set and individual observation data; horizon-specific aggregates not supplied,authoritative reconciliation provides overall events but not horizon allocation
+730,,,,,,,,No,not estimable,requires approved index risk set and individual observation data; horizon-specific aggregates not supplied,authoritative reconciliation provides overall events but not horizon allocation

@@ -1,0 +1,21 @@
+metric,value,denominator,unit,definition
+common_index_patients,168915,168915,patients,Transient reconstructed common index; aggregate only
+patient_DOD_available_both_sources_and_agree,24543,168915,patients,Nonmissing observation_end and demographics DOD agree by subject
+patient_DOD_missing_or_not_agreeing,144372,168915,patients,Unknown vital status; not survival
+quality_screened_unique_inhospital_death_timestamp,6813,168915,patients,"Exactly one distinct admission death time, within an admission interval"
+multiple_distinct_admission_death_times,5,168915,patients,Conflicting distinct admission-level death times
+any_source_consistent_death_record,24543,168915,patients,DOD agreement or quality-screened in-hospital death timestamp; overlapping sources counted once
+agreeing_DOD_calendar_day_before_index,10,24543,patients,Date-precision DOD strictly before index date
+agreeing_DOD_same_calendar_day_as_index,254,24543,patients,Date-precision tie; within-day order unknown
+agreeing_DOD_calendar_day_after_index,24279,24543,patients,Date-precision DOD strictly after index date
+quality_timestamp_before_index_time,0,6813,patients,Unique in-interval death timestamp strictly before index timestamp
+quality_timestamp_after_index_time,6813,6813,patients,Unique in-interval death timestamp strictly after index timestamp
+source_boundary_unknown_continuous_followup,168915,168915,patients,Individual observation after last encounter is unknown for all participants
+confirmed_death_before_MI_by_90d,7786,168915,patients,Only source-consistent date/timestamp; same-day death-MI order not presumed
+confirmed_death_before_MI_by_180d,10328,168915,patients,Only source-consistent date/timestamp; same-day death-MI order not presumed
+confirmed_death_before_MI_by_365d,13918,168915,patients,Only source-consistent date/timestamp; same-day death-MI order not presumed
+confirmed_death_before_MI_by_730d,16622,168915,patients,Only source-consistent date/timestamp; same-day death-MI order not presumed
+observation_end_source_patients,180733,180733,patients,Observation-end source universe; distinct subject_id rows
+observation_end_equals_dod_day,27980,180733,patients,Per-patient observation_end equals recorded DOD calendar date
+no_dod_and_observation_end_equals_last_discharge,152753,180733,patients,"No DOD; per-patient observation_end equals last discharge, not continuous follow-up"
+global_administrative_boundary_verified,0,1,verification flag,No source-wide extraction cutoff verified
