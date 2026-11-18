@@ -1,5 +1,7 @@
 # Phase 2 — Follow-up, Death, and Competing-Risk Specification
 
+> **Current status:** Horizon event and encounter aggregates are available under `aggregates/PHASE2_FOLLOWUP_HORIZON_COMPARISON.csv`, but they do not establish continuous observation or an individual censoring process. Prepared-source audit found no enrollment, claims, outpatient visit registry or verified global data boundary. Death remains incomplete. Gate 0 is not passed; see `PHASE2_OBSERVATION_AND_DEATH_FINAL_AUDIT.md`.
+
 ## 1. Target event process
 
 Time zero is the common index admission timestamp. Follow-up horizon candidate is `τ=365 elapsed days`; `τ` remains subject to aggregate feasibility and research-team approval. Evaluate 90, 180, 365, and 730 days without selecting a horizon based on effect estimates. Event is the first ICD-defined acute MI admission strictly after index. Death before first MI competes with MI for a cumulative-incidence estimand; it is not treated as ordinary independent censoring.
@@ -45,7 +47,7 @@ If death linkage remains incomplete, no single scenario is treated as truth. Rep
 ## 6. Decision status
 
 - Fixed event definition and competing-risk estimand: **finalised design choice**.
-- 365-day horizon: **recommended, empirical validation required**; current horizon-specific table is unavailable.
+- 365-day horizon: **candidate only; no tested horizon establishes continuous follow-up**. Recorded event/encounter counts are available in `aggregates/PHASE2_FOLLOWUP_HORIZON_COMPARISON.csv`, but complete fixed-horizon risk remains unidentified.
 - Death completeness: **blocked by incomplete source ascertainment** despite strong agreement among recorded values.
 - Individual censoring / continuous observation: **blocked by unavailable data**.
 - No effect estimation is permitted until source boundary, death, censoring and horizon gates pass.

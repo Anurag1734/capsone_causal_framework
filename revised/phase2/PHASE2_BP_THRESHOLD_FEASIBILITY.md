@@ -23,7 +23,7 @@ OMR QC found 300,059 candidate BP records in the fixed window for the reconstruc
 | 3 | 31,478 | 722 | 30,756 | 58.3% | 59.0% | 126.57 | 125.67 | 6 (4–11) | 9.93 (7.22–13.38) | 18 (6–50) |
 | 4 | 25,564 | 582 | 24,982 | 47.4% | 47.6% | 126.04 | 125.19 | 8 (5–12) | 10.08 (7.58–13.37) | 14 (5–42) |
 
-*At the ≥1 threshold, within-person SD is calculable only for people with at least two readings; it does not describe the single-reading participants. Full q05/q25/q75/q95 SBP, reading-count and timing/frequency distributions are in `PHASE2_BP_THRESHOLD_COMPARISON.csv`.
+*At the ≥1 threshold, within-person SD is calculable only for people with at least two readings; it does not describe the single-reading participants. Full q05/q25/q75/q95 SBP, reading-count and timing/frequency distributions are in `aggregates/PHASE2_BP_THRESHOLD_COMPARISON.csv`.
 
 At ≥2, 13,610 (25.2%) of the ≥1 BP-eligible patients and 290 (23.7%) of their incident cases are lost. The median count rises from 3 to 5, and the retained cohort has an observed within-person SD for every person. This is a meaningful availability/reliability-design improvement over a single reading, but the SD distribution is not materially narrower and repeated OMR readings are not a standardized reliability study. The data therefore support **≥2 as a reasonable primary measurement-count recommendation**, not proof that its mean is clinically more reliable or that selection bias is reduced. ≥3 and ≥4 impose larger losses without a demonstrated reliability advantage here.
 

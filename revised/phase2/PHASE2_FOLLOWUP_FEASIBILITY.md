@@ -19,7 +19,7 @@ The four requested horizons are elapsed 90, 180, 365, and 730 days from index. A
 
 Across all horizons, 24,543/168,915 patients have a DOD date agreeing between the two patient-level sources; 6,813 have a unique in-hospital death timestamp that falls inside an admission interval. These sets overlap and must not be added. The database field `observation_end` is per-patient: in the source universe it equals DOD for all 27,980 patients with DOD and equals last discharge for all 152,753 without DOD. This is not a shared database cutoff or evidence of continuous observation.
 
-The source has 74,155 patients with any later admission at some point after index; 94,760 have no later admission record. Even for those with later records, median time to the last subsequent encounter is 646.9 days (IQR 108.6–1,671.1) among people with a later record. These are encounter-time summaries only. The median event time by horizon and its q25/q75 are available in `PHASE2_FOLLOWUP_HORIZON_COMPARISON.csv`.
+The source has 74,155 patients with any later admission at some point after index; 94,760 have no later admission record. Even for those with later records, median time to the last subsequent encounter is 646.9 days (IQR 108.6–1,671.1) among people with a later record. These are encounter-time summaries only. The median event time by horizon and its q25/q75 are available in `aggregates/PHASE2_FOLLOWUP_HORIZON_COMPARISON.csv`.
 
 ## Administrative boundary and observation status
 

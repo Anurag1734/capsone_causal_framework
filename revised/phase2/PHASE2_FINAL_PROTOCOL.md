@@ -17,7 +17,7 @@ Target the selected population of MIMIC-IV patients entering the observable hosp
 
 ## Exposure/intervention
 
-Use outpatient OMR; parse SBP and DBP; accept SBP 60–260, DBP 20–160 mmHg, and SBP>DBP; only chartdate strictly before index. Candidate window `[index_date-730d,index_date)`; mean SBP. Recommend ≥2 valid readings as primary threshold if aggregate retention/event/measurement diagnostics support it; compare ≥1/≥2/≥3/≥4 without effect-guided selection. At present, only ≥1 counts are known. The fixed 10 mmHg shift is not to be altered for support problems. Unsupported values must be reported; no automatic trimming.
+Use outpatient OMR; parse SBP and DBP; accept SBP 60–260, DBP 20–160 mmHg, and SBP>DBP; only chartdate strictly before index. Candidate window `[index_date-730d,index_date)`; mean SBP. Recommend ≥2 valid readings as primary threshold if aggregate retention/event/measurement diagnostics support it; compare ≥1/≥2/≥3/≥4 without effect-guided selection. Phase 2.0-R has since completed the ≥1/≥2/≥3/≥4 aggregate comparison; ≥2 is recommended pending researcher approval. The fixed 10 mmHg shift is not to be altered for support problems. Unsupported values must be reported; no automatic trimming.
 
 ## Adjustment and identification
 

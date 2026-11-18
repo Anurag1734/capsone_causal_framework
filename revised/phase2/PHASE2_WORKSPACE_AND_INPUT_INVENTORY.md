@@ -2,6 +2,8 @@
 
 **Task:** Phase 2 setup inventory only. No Phase 2.0 decisions were closed, no cohort was built, no outcome/effect model was fit, and no treatment effect was estimated. This document and any future Phase 2 deliverables belong under `revised/phase2/`; row-level data must remain outside this deliverables folder.
 
+> **Current inventory status (Task A):** The following setup inventory was written before Phase 2.0-R. Its historic “not streamed/not verified” statements are superseded by §12 below. Current source data remain six RAR archives only; selected archive members were streamed for aggregate feasibility, not extracted into standalone folders. Current decision evidence is in `PHASE2_GATE0_REMEDIATION_REPORT.md` and the authoritative `PHASE2_GATE0_REMEDIATION_DECISION_REGISTER.md`. Gate 0 remains failed; no cohort or causal effects were built.
+
 ## 1. Workspace and Phase 1 handoff
 
 Repository checkout: `C:\Capstone\capsone_causal_framework`. The Phase 1 package exists in `revised/phase1/` with the eight requested protocol documents plus `WORKSPACE_AND_INPUT_INVENTORY.md`. The revised protocol specifies:
@@ -123,3 +125,40 @@ Root `.gitignore` excludes `data/`, `dataset/`, `datasets/`, `*.rar`, common wav
 5. The Phase 1/team decisions listed in §1 remain open. Per instruction, they must be closed in Phase 2.0 before primary cohort construction; this inventory task does not close them.
 
 **Task boundary:** workspace preparation and inspection only. No Phase 2 analysis or cohort construction has started.
+
+## 12. Current audited status (Task A)
+
+This section supersedes earlier setup-time statements in this inventory where they said that archive members had not been streamed, OMR copy identity was unknown, or Phase 2 feasibility outputs did not yet exist.
+
+### Actual local data layout and archive contents
+
+Verified files under `data/` are the six archives in `data/raw/`; there are no extracted standalone source folders. The six archives are not one homogeneous set of raw tables:
+
+- `hosp.rar` contains prepared hospital source CSV members: admissions, patients, prescriptions, emar, and OMR.
+- `icu.rar` contains ICU source CSV members: d_items, inputevents, procedureevents, and chartevents. It was listed but not extracted/read for Phase 2.
+- `labevents.rar` contains labevents.csv. It was listed but not extracted/read for this BP/MI feasibility task.
+- `longitudinal.rar` contains **derived longitudinal Parquet/audit outputs**, including admissions chronology, diagnosis tables, demographics, observation-end, MI-related derivatives, coverage catalogues, and Phase 1/2 statistics. Selected Parquet members were streamed directly from the archive for aggregate checks.
+- `master.rar` contains prepared `master/train.parquet`, `validation.parquet`, and `test.parquet` ECG splits. The prior repository inventory describes 95 handcrafted ECG features and 64 latent columns in these prepared files; the archive's Parquet members were not opened for this task, and no encoder-decoder/checkpoint was sought or audited.
+- `omr.rar` contains a separately packaged `omr.csv`; its uncompressed bytes are identical to `hosp.rar::omr.csv` (265,978,805 bytes; SHA-256 `e8a0178e8c288bccbb0f43676c22b4e30505b812f5701a5cbb4ea4bfc142c255`).
+
+`tar -tf` listed every archive member. This does not certify full archive CRC/integrity. The aggregate script successfully streamed only `longitudinal/admissions_chronology.parquet`, `diagnoses_all.parquet`, `patients_demographics.parquet`, `observation_end.parquet`, and the OMR CSV; no full archive extraction occurred. No archive was modified.
+
+### Current outputs and execution state
+
+- Aggregate-only Phase 2.0-R outputs are canonical under `aggregates/`; see `PHASE2_CANONICAL_FILE_INDEX.md` for the file-by-file map.
+- The retained aggregate feasibility script reproduced 168,915 common-index participants, 3,207 first post-index MI-coded events, 165,708 without a recorded event, and BP threshold counts matching the remediation report. It wrote summarized metrics only; patient linkage remained transient in memory.
+- Death-source reconciliation and OMR archive-comparison scripts were rerun successfully and wrote aggregate metadata only.
+- The publisher now writes enriched tables into `aggregates/`, avoiding top-level duplicates.
+- No individual cohort, final patient-level BP exposure, patient-level predictions, ECG waveforms, or patient-specific records are stored in `revised/phase2/`.
+- Root `.gitignore` ignores `data/`, `*.rar`, and Python cache files. `data/derived/revised_phase2/` is covered by `data/`; verify with `git check-ignore` before any future row-level write.
+- Gate 0 remains **not passed**. Follow-up, death, covariate timing, support and approvals remain as detailed in the remediation report; this inventory does not authorize Phase 2.1 or Phase 2.6.
+
+## 13. Prepared-source investigation (Task B)
+
+Actual Parquet schemas were inspected from selected archive members. `admissions_chronology.parquet` has 431,231 rows/20 columns; `diagnoses_all.parquet` has 4,756,326 rows/8 columns including patient/admission keys, ICD code/version and admission dates; `diagnoses_mi_codes.parquet` has 26,824 rows/8 columns; `mi_admissions.parquet` has 25,755 rows/8 columns; `patients_demographics.parquet` has 299,712 rows/6 columns; and `observation_end.parquet` has 180,733 rows/7 columns. The OMR, lab and vitals coverage catalogues are aggregate-only (13, 26 and 14 rows, respectively). The medication summary in `phase2_stats.json` reports 15,416,708 prescription rows across 365,442 admissions and 158,421 patients; it is source-wide/legacy aggregate context, not outpatient adherence or Phase 2 covariate data.
+
+The actual `master/test.parquet` schema was read from Parquet metadata only: 56,798 rows and 184 columns, including 64 `z_ecg_*` columns, 95 handcrafted ECG measurements, four clinical comorbidity flags, 11 medication/treatment flags, labels, ECG/MI timing, age and sex. A single split was streamed to an anonymous temporary file for metadata inspection; no row values were read, and the file was removed automatically. No other master split was extracted, no ECG waveform accessed, and no beta-VAE pipeline/checkpoint investigation was performed. The clinical columns are not Phase 2 aligned: comorbidity flags have no dates, and treatment fields are tied to the ECG/admission pipeline.
+
+The documented `clinical/features_comorbidities.csv` (admission-keyed prior-history summary), `features_treatments.csv`, `features_labs.csv`, and `features_vitals.csv` are not present as standalone files locally or as named members in the six archives. The first is described in the historical Phase F documentation and generated by `src/features/extract_comorbidities.py`; this script output contains binary flags only, based on any earlier admission before each anchor, with no diagnosis dates. It is not valid pre-window history for the earliest-index Phase 2 cohort. The actual master schema carries corresponding flags but not the dates needed to verify B.
+
+Actual headers confirm admissions/patients identifiers and dates, prescription order `starttime/stoptime`, eMAR `charttime/event_txt`, and lab `charttime`; these are event/source records, not continuous observation. The local archives include no outpatient visit registry, claims/enrollment, external vital-status link, or verified release boundary. The aggregate temporal diagnosis evidence and implication are documented in `PHASE2_BASELINE_DIAGNOSIS_TEMPORAL_VALIDATION.md` and `aggregates/PHASE2_BASELINE_DIAGNOSIS_TEMPORAL_SUMMARY.csv`.

@@ -17,7 +17,7 @@ The older reconciled ≥1-reading case counts are reproduced when using age at *
 | Diabetes documented before window start | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | No diabetes documented before window start | 168,915 | 3,207 | 40,346 | 933 | 227 | 2,700 | 13,053 |
 
-*These are recorded deaths under the source quality/date-order rules, not complete mortality. “Any later admission” is a healthcare-record contact, not continuous follow-up. Full counts, missingness, BP distributions and alternative thresholds are in `PHASE2_SUBGROUP_PRECISION_TABLE.csv`.
+*These are recorded deaths under the source quality/date-order rules, not complete mortality. “Any later admission” is a healthcare-record contact, not continuous follow-up. Full counts, missingness, BP distributions and alternative thresholds are in `aggregates/PHASE2_SUBGROUP_PRECISION_TABLE.csv`.
 
 The primary age-at-window-start ≥2 split has 324 versus 609 cases; sex has 450 versus 483. At index age, the ≥2 counts are 269 versus 664. The pre-window diabetes split is non-estimable because it has no observed variation. Using diabetes documented by index yields 6,834 BP-eligible / 383 cases versus 33,512 / 550 for ≥2, but that documentation can arise during the BP exposure window and is not a temporally valid primary subgroup. BMI is available before the window in 5,075/40,346 (12.6%) of ≥2 participants; it is missing for 87.4%, and cannot repair the missing diagnosis history.
 

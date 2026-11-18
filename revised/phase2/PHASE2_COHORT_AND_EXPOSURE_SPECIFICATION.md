@@ -1,5 +1,7 @@
 # Phase 2 — Cohort and Exposure Specification
 
+> **Current status:** Phase 2.0-R completed the >=1/>=2/>=3/>=4 aggregate comparison; see `aggregates/PHASE2_BP_THRESHOLD_COMPARISON.csv`. The at least 2 threshold is recommended but requires team approval. No patient-level cohort was constructed. Prepared-source review finds no pre-window diabetes, hypertension or CKD records under the earliest-index rule; see `PHASE2_BASELINE_DIAGNOSIS_TEMPORAL_VALIDATION.md`. Gate 0 remains failed.
+
 This is an implementation specification, not a constructed cohort. No patient-level cohort or final exposure variables were created in Phase 2.0.
 
 ## 1. Target population and keys
@@ -30,7 +32,7 @@ For each patient/window threshold, retain count, arithmetic mean SBP (primary su
 
 **Primary recommendation:** at least 2 valid readings in the fixed 730-day window, conditional on aggregate retention, case count, measurement reliability, and selection review. Compare ≥1, ≥2, ≥3, and ≥4. Do not choose by effect direction.
 
-Only the ≥1 aggregate is currently known: 53,956 eligible patients, 1,223 incident cases, and 52,733 without a recorded incident event before censoring; retention is 31.9% of the 168,915 common-index cohort and 38.1% of the 3,207 incident cases. The remaining threshold-specific fields and SBP distribution are blank/unavailable in `aggregates/bp_count_threshold_feasibility.csv`; they must not be interpreted as zero. Because this task forbids building the primary cohort, the ≥2 recommendation remains gated. If ≥2 is not defensible after aggregate checks, return to the team and select the least restrictive scientifically defensible threshold.
+Phase 2.0-R completed the threshold comparison: >=1/>=2/>=3/>=4 valid readings yield 53,956/40,346/31,478/25,564 eligible patients and 1,223/933/722/582 recorded first-MI cases. The at least 2 threshold retains 74.8% of the at least 1 BP population and 76.3% of its cases; it remains a recommendation requiring team approval. See `aggregates/PHASE2_BP_THRESHOLD_COMPARISON.csv`. These are aggregate feasibility counts, not final cohort membership.
 
 ## 5. Intervention
 

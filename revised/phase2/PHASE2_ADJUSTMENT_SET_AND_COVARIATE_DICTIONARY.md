@@ -1,6 +1,6 @@
 # Phase 2 — Adjustment Set and Covariate Dictionary
 
-The common temporal cutoff is `B = exposure_window_start = index_date - 730 days`. Except for age/sex, primary baseline covariates must be documented strictly before `B`. A record during the exposure window or after index is not a baseline confounder. The dictionary is a protocol; source availability, units, and chronology must be validated before use.
+The common temporal cutoff is `B = exposure_window_start = index_date - 730 days`. Except for age/sex, primary baseline covariates must be documented strictly before `B`. A record during the exposure window or after index is not a baseline confounder. The dictionary is a protocol; source availability, units, and chronology must be validated before use. **Current empirical status:** prepared diagnosis audit found zero diabetes, hypertension, or CKD documentation before B in the 168,915-person common-index population. These covariates cannot be varied/adjusted under the current earliest-index and cutoff rules; see `PHASE2_BASELINE_DIAGNOSIS_TEMPORAL_VALIDATION.md`. This does not justify moving the cutoff.
 
 | Variable | Operational definition | Role / primary handling | Missingness interpretation / validation |
 |---|---|---|---|
